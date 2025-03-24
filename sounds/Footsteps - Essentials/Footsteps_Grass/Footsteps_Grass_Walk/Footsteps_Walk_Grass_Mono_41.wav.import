@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c11fhxf17hh0i"
+path="res://.godot/imported/Footsteps_Walk_Grass_Mono_41.wav-b50479d15b2c3e20c5dc4042c25183b3.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Grass/Footsteps_Grass_Walk/Footsteps_Walk_Grass_Mono_41.wav"
+dest_files=["res://.godot/imported/Footsteps_Walk_Grass_Mono_41.wav-b50479d15b2c3e20c5dc4042c25183b3.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

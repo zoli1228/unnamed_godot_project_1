@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://da65nb87orgb0"
+path="res://.godot/imported/Footsteps_Rock_Run_01.wav-f4688e2095353ac3b84f5ad35df7fbf9.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Rock/Footsteps_Rock_Run/Footsteps_Rock_Run_01.wav"
+dest_files=["res://.godot/imported/Footsteps_Rock_Run_01.wav-f4688e2095353ac3b84f5ad35df7fbf9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

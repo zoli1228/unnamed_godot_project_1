@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dxh0msnlmqlkb"
+path="res://.godot/imported/Footsteps_MetalV1_Walk_03.wav-c82a048d9d15b1cfe19c97c51126ac85.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Metal/Footsteps_Metal_Walk/Footsteps_MetalV1_Walk_03.wav"
+dest_files=["res://.godot/imported/Footsteps_MetalV1_Walk_03.wav-c82a048d9d15b1cfe19c97c51126ac85.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

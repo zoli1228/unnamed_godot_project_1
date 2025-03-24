@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://xmyx0ksie25s"
+path="res://.godot/imported/Footsteps_Mud_Run_02.wav-14765f554b20c6ac5ac8d59826adb18e.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Mud/Footsteps_Mud_Run/Footsteps_Mud_Run_02.wav"
+dest_files=["res://.godot/imported/Footsteps_Mud_Run_02.wav-14765f554b20c6ac5ac8d59826adb18e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

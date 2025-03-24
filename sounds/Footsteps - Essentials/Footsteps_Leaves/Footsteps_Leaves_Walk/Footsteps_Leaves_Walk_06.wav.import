@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://iwwvodi1fw58"
+path="res://.godot/imported/Footsteps_Leaves_Walk_06.wav-50647a10ad68a0465c04ca3096438ae5.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Leaves/Footsteps_Leaves_Walk/Footsteps_Leaves_Walk_06.wav"
+dest_files=["res://.godot/imported/Footsteps_Leaves_Walk_06.wav-50647a10ad68a0465c04ca3096438ae5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

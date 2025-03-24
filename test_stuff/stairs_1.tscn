@@ -1,0 +1,106 @@
+[gd_scene load_steps=6 format=3 uid="uid://o06w2imabt4r"]
+
+[ext_resource type="Texture2D" uid="uid://v48ry4283thv" path="res://textures/dev/dev_tile_orange.png" id="1_ifspj"]
+[ext_resource type="Texture2D" uid="uid://db7fl0qucso2p" path="res://textures/floors/office-carpet-fabric1-bl/office-carpet-fabric_normal-ogl.png" id="2_nsc2v"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xwiga"]
+albedo_texture = ExtResource("1_ifspj")
+normal_enabled = true
+normal_texture = ExtResource("2_nsc2v")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_vmlt5"]
+size = Vector3(0.995, 0.8, 7.515)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_ifspj"]
+data = PackedVector3Array(-0.4975, 0.4, 3.7575, 0.4975, 0.4, 3.7575, -0.4975, -0.4, 3.7575, 0.4975, 0.4, 3.7575, 0.4975, -0.4, 3.7575, -0.4975, -0.4, 3.7575, 0.4975, 0.4, -3.7575, -0.4975, 0.4, -3.7575, 0.4975, -0.4, -3.7575, -0.4975, 0.4, -3.7575, -0.4975, -0.4, -3.7575, 0.4975, -0.4, -3.7575, 0.4975, 0.4, 3.7575, 0.4975, 0.4, -3.7575, 0.4975, -0.4, 3.7575, 0.4975, 0.4, -3.7575, 0.4975, -0.4, -3.7575, 0.4975, -0.4, 3.7575, -0.4975, 0.4, -3.7575, -0.4975, 0.4, 3.7575, -0.4975, -0.4, -3.7575, -0.4975, 0.4, 3.7575, -0.4975, -0.4, 3.7575, -0.4975, -0.4, -3.7575, 0.4975, 0.4, 3.7575, -0.4975, 0.4, 3.7575, 0.4975, 0.4, -3.7575, -0.4975, 0.4, 3.7575, -0.4975, 0.4, -3.7575, 0.4975, 0.4, -3.7575, -0.4975, -0.4, 3.7575, 0.4975, -0.4, 3.7575, -0.4975, -0.4, -3.7575, 0.4975, -0.4, 3.7575, 0.4975, -0.4, -3.7575, -0.4975, -0.4, -3.7575)
+
+[node name="stairs" type="Node3D"]
+
+[node name="step" type="MeshInstance3D" parent="."]
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0.3, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step2"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0.6, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step3"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 0.9, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step4"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step4/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9, 1.2, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step5"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step5/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 1.5, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step6"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step6/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step7" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 1.8, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step7"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step7/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")
+
+[node name="step8" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8, 2.1, 0)
+material_override = SubResource("StandardMaterial3D_xwiga")
+mesh = SubResource("BoxMesh_vmlt5")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="step8"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="step8/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_ifspj")

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://6nee1cyal1b1"
+path="res://.godot/imported/Footsteps_WaterV1_Walk_09.wav-62a73c984f2b810108091b5c2ff6f484.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Water/Footsteps_Water_Walk/Footsteps_WaterV1_Walk_09.wav"
+dest_files=["res://.godot/imported/Footsteps_WaterV1_Walk_09.wav-62a73c984f2b810108091b5c2ff6f484.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

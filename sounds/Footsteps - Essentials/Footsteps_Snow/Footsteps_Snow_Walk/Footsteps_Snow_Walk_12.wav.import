@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cf86fxbhqm6m"
+path="res://.godot/imported/Footsteps_Snow_Walk_12.wav-75cd2cc51b39f3c30fd933470a6f1338.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Snow/Footsteps_Snow_Walk/Footsteps_Snow_Walk_12.wav"
+dest_files=["res://.godot/imported/Footsteps_Snow_Walk_12.wav-75cd2cc51b39f3c30fd933470a6f1338.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

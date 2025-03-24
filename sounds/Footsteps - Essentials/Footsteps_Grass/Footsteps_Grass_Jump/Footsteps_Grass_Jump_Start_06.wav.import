@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b6vwhsy37fkpv"
+path="res://.godot/imported/Footsteps_Grass_Jump_Start_06.wav-1559839e0b7479b10e629fb365e5eb86.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Grass/Footsteps_Grass_Jump/Footsteps_Grass_Jump_Start_06.wav"
+dest_files=["res://.godot/imported/Footsteps_Grass_Jump_Start_06.wav-1559839e0b7479b10e629fb365e5eb86.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

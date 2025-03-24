@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dam48ykbevl10"
+path="res://.godot/imported/Footsteps_Sand_Walk_09.wav-1ef6789cc09e35659f68baa0bd03a84b.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Sand/Footsteps_Sand_Walk/Footsteps_Sand_Walk_09.wav"
+dest_files=["res://.godot/imported/Footsteps_Sand_Walk_09.wav-1ef6789cc09e35659f68baa0bd03a84b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

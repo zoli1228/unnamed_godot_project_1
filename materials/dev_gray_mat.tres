@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://b8kacb4du3kre"]
+
+[ext_resource type="Texture2D" uid="uid://daxqw62gkxrq5" path="res://textures/dev/dev_tile_gray_chequered.png" id="1_mmj2u"]
+[ext_resource type="Texture2D" uid="uid://db7fl0qucso2p" path="res://textures/floors/office-carpet-fabric1-bl/office-carpet-fabric_normal-ogl.png" id="2_hswr5"]
+
+[resource]
+albedo_texture = ExtResource("1_mmj2u")
+normal_enabled = true
+normal_texture = ExtResource("2_hswr5")
+uv1_triplanar = true
+uv1_world_triplanar = true

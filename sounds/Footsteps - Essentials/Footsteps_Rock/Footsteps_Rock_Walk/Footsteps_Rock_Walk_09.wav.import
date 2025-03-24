@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bnkddp36atmo3"
+path="res://.godot/imported/Footsteps_Rock_Walk_09.wav-7ebfce35dcb5a3c88f139b38a0b90f29.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Rock/Footsteps_Rock_Walk/Footsteps_Rock_Walk_09.wav"
+dest_files=["res://.godot/imported/Footsteps_Rock_Walk_09.wav-7ebfce35dcb5a3c88f139b38a0b90f29.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

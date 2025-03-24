@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbfecw2ptytda"
+path="res://.godot/imported/Footsteps_Snow_Hard_Jump_Start_03.wav-87e84849c492e478b806e309dfbf4528.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Snow/Footsteps_Snow_Jump/Footsteps_Snow_Hard_Jump_Start_03.wav"
+dest_files=["res://.godot/imported/Footsteps_Snow_Hard_Jump_Start_03.wav-87e84849c492e478b806e309dfbf4528.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

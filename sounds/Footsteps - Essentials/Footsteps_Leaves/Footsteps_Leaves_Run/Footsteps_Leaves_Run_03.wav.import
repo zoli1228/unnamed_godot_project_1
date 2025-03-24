@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dcx6pmhueex5j"
+path="res://.godot/imported/Footsteps_Leaves_Run_03.wav-d979bdcc5b556b28b6850c8c6a02ce39.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Leaves/Footsteps_Leaves_Run/Footsteps_Leaves_Run_03.wav"
+dest_files=["res://.godot/imported/Footsteps_Leaves_Run_03.wav-d979bdcc5b556b28b6850c8c6a02ce39.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

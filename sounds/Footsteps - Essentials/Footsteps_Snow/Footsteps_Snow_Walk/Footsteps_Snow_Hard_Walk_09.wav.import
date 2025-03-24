@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d1uh1dp72v0vs"
+path="res://.godot/imported/Footsteps_Snow_Hard_Walk_09.wav-8e3b35c9322b94d80b594cf954532634.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Snow/Footsteps_Snow_Walk/Footsteps_Snow_Hard_Walk_09.wav"
+dest_files=["res://.godot/imported/Footsteps_Snow_Hard_Walk_09.wav-8e3b35c9322b94d80b594cf954532634.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

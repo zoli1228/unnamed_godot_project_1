@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dhpqxjm6l4x27"
+path="res://.godot/imported/Footsteps_Mud_Walk_07.wav-0c20dcab35427cce83df87991c40ad6b.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Mud/Footsteps_Mud_Walk/Footsteps_Mud_Walk_07.wav"
+dest_files=["res://.godot/imported/Footsteps_Mud_Walk_07.wav-0c20dcab35427cce83df87991c40ad6b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

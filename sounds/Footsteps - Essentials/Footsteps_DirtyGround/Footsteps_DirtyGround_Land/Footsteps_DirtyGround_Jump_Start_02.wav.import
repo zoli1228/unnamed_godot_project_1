@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dg4wnnoqfmso4"
+path="res://.godot/imported/Footsteps_DirtyGround_Jump_Start_02.wav-433ee38b36c945721c99b369e48d5d9c.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_DirtyGround/Footsteps_DirtyGround_Land/Footsteps_DirtyGround_Jump_Start_02.wav"
+dest_files=["res://.godot/imported/Footsteps_DirtyGround_Jump_Start_02.wav-433ee38b36c945721c99b369e48d5d9c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

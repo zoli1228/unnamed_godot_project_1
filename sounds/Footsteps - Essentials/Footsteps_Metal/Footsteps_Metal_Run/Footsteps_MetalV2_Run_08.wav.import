@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://ty4rctq2ax6h"
+path="res://.godot/imported/Footsteps_MetalV2_Run_08.wav-594df73a08366fac6f29ef0ae0d60627.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Metal/Footsteps_Metal_Run/Footsteps_MetalV2_Run_08.wav"
+dest_files=["res://.godot/imported/Footsteps_MetalV2_Run_08.wav-594df73a08366fac6f29ef0ae0d60627.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

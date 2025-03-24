@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cxrwf8jqfju1g"
+path="res://.godot/imported/Footsteps_Leaves_Jump_Start_01.wav-38f12ce758bda0b988d694c6f01ea7e6.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Leaves/Footsteps_Leaves_Jump/Footsteps_Leaves_Jump_Start_01.wav"
+dest_files=["res://.godot/imported/Footsteps_Leaves_Jump_Start_01.wav-38f12ce758bda0b988d694c6f01ea7e6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

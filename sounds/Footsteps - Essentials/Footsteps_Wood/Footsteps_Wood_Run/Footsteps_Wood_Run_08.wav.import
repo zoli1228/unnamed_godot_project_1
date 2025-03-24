@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bce5j2jptgs0c"
+path="res://.godot/imported/Footsteps_Wood_Run_08.wav-90bee7381f8108b91a9d8b1e20f68ab9.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_Wood/Footsteps_Wood_Run/Footsteps_Wood_Run_08.wav"
+dest_files=["res://.godot/imported/Footsteps_Wood_Run_08.wav-90bee7381f8108b91a9d8b1e20f68ab9.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

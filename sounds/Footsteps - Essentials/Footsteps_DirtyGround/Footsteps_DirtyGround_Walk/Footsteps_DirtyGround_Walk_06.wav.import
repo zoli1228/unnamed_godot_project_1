@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://df2vr783rj3jn"
+path="res://.godot/imported/Footsteps_DirtyGround_Walk_06.wav-2ce8a2ec77e483759966cd1e3708025a.sample"
+
+[deps]
+
+source_file="res://sounds/Footsteps - Essentials/Footsteps_DirtyGround/Footsteps_DirtyGround_Walk/Footsteps_DirtyGround_Walk_06.wav"
+dest_files=["res://.godot/imported/Footsteps_DirtyGround_Walk_06.wav-2ce8a2ec77e483759966cd1e3708025a.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
