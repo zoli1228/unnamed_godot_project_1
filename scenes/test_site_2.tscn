@@ -1,15 +1,19 @@
-[gd_scene load_steps=9 format=3 uid="uid://s6ww4bswcmop"]
+[gd_scene load_steps=13 format=3 uid="uid://s6ww4bswcmop"]
 
 [ext_resource type="PackedScene" uid="uid://dvaow7k72cron" path="res://models/test_site2.glb" id="1_j6ih6"]
 [ext_resource type="Material" uid="uid://b8kacb4du3kre" path="res://materials/dev_gray_mat.tres" id="2_1nvrl"]
 [ext_resource type="Material" uid="uid://bergri1ojjf2x" path="res://materials/dev_orange_mat.tres" id="3_0dvah"]
+[ext_resource type="Texture2D" uid="uid://v48ry4283thv" path="res://textures/dev/dev_tile_orange.png" id="4_1nvrl"]
 
 [sub_resource type="GDScript" id="GDScript_j6ih6"]
 script/source = "extends MeshInstance3D
+@onready var rotator_001: MeshInstance3D = $\"../rotator_001\"
+@onready var round_stairs: MeshInstance3D = $\"../round_stairs\"
 
 func _physics_process(delta: float) -> void:
 	rotation.z -= delta * 0.2
-	rotation_degrees.x += sin(Time.get_ticks_msec() / 1000.0) * delta
+	rotator_001.rotation.z += delta * 0.3
+	round_stairs.rotation.y += delta * 0.1
 "
 
 [sub_resource type="BoxMesh" id="BoxMesh_j6ih6"]
@@ -25,6 +29,22 @@ height = 2.97
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1nvrl"]
 points = PackedVector3Array(-0.000586987, -1.485, -3, -0.294244, -1.485, -2.9859, -0.000586987, 1.485, -3, 0.293657, -1.485, -2.9859, -0.294244, 1.485, -2.9859, -0.585552, -1.485, -2.94244, 0.293657, 1.485, -2.9859, 0.584965, -1.485, -2.94244, -0.585552, 1.485, -2.94244, -0.870986, -1.485, -2.87138, 0.584965, 1.485, -2.94244, 0.8704, -1.485, -2.87138, -0.870986, 1.485, -2.87138, -1.1482, -1.485, -2.77212, 0.8704, 1.485, -2.87138, 1.14761, -1.485, -2.77212, -1.1482, 1.485, -2.77212, -1.41425, -1.485, -2.64585, 1.14761, 1.485, -2.77212, 1.41367, -1.485, -2.64585, -1.41425, 1.485, -2.64585, -1.6668, -1.485, -2.49491, 1.41367, 1.485, -2.64585, 1.66621, -1.485, -2.49491, -1.6668, 1.485, -2.49491, -1.90348, -1.485, -2.3193, 1.66621, 1.485, -2.49491, 1.9029, -1.485, -2.3193, -1.90348, 1.485, -2.3193, -2.12138, -1.485, -2.12138, 1.9029, 1.485, -2.3193, 2.12079, -1.485, -2.12138, -2.12138, 1.485, -2.12138, -2.3193, -1.485, -1.90348, 2.12079, 1.485, -2.12138, 2.31872, -1.485, -1.90348, -2.3193, 1.485, -1.90348, -2.49491, -1.485, -1.6668, 2.31872, 1.485, -1.90348, 2.49432, -1.485, -1.6668, -2.49491, 1.485, -1.6668, -2.64585, -1.485, -1.41425, 2.49432, 1.485, -1.6668, 2.64526, -1.485, -1.41425, -2.64585, 1.485, -1.41425, -2.77212, -1.485, -1.1482, 2.64526, 1.485, -1.41425, 2.77154, -1.485, -1.1482, -2.77212, 1.485, -1.1482, -2.87138, -1.485, -0.870986, 2.77154, 1.485, -1.1482, 2.87079, -1.485, -0.870986, -2.87138, 1.485, -0.870986, -2.94244, -1.485, -0.585552, 2.87079, 1.485, -0.870986, 2.94186, -1.485, -0.585552, -2.94244, 1.485, -0.585552, -2.9859, -1.485, -0.294244, 2.94186, 1.485, -0.585552, 2.98532, -1.485, -0.294244, -2.9859, 1.485, -0.294244, -3, -1.485, -0.000586987, 2.98532, 1.485, -0.294244, 2.99941, -1.485, -0.000586987, -3, 1.485, -0.000586987, -2.9859, -1.485, 0.293657, 2.99941, 1.485, -0.000586987, 2.98532, -1.485, 0.293657, -2.9859, 1.485, 0.293657, -2.94244, -1.485, 0.584965, 2.98532, 1.485, 0.293657, 2.94186, -1.485, 0.584965, -2.94244, 1.485, 0.584965, -2.87138, -1.485, 0.8704, 2.94186, 1.485, 0.584965, 2.87079, -1.485, 0.8704, -2.87138, 1.485, 0.8704, -2.77212, -1.485, 1.14761, 2.87079, 1.485, 0.8704, 2.77154, -1.485, 1.14761, -2.77212, 1.485, 1.14761, -2.64585, -1.485, 1.41367, 2.77154, 1.485, 1.14761, 2.64526, -1.485, 1.41367, -2.64585, 1.485, 1.41367, -2.49491, -1.485, 1.66621, 2.64526, 1.485, 1.41367, 2.49432, -1.485, 1.66621, -2.49491, 1.485, 1.66621, -2.3193, -1.485, 1.9029, 2.49432, 1.485, 1.66621, 2.31872, -1.485, 1.9029, -2.3193, 1.485, 1.9029, -2.12138, -1.485, 2.12079, 2.31872, 1.485, 1.9029, 2.12079, -1.485, 2.12079, -2.12138, 1.485, 2.12079, -1.90348, -1.485, 2.31872, 2.12079, 1.485, 2.12079, 1.9029, -1.485, 2.31872, -1.90348, 1.485, 2.31872, -1.6668, -1.485, 2.49432, 1.9029, 1.485, 2.31872, 1.66621, -1.485, 2.49432, -1.6668, 1.485, 2.49432, -1.41425, -1.485, 2.64526, 1.66621, 1.485, 2.49432, 1.41367, -1.485, 2.64526, -1.41425, 1.485, 2.64526, -1.1482, -1.485, 2.77154, 1.41367, 1.485, 2.64526, 1.14761, -1.485, 2.77154, -1.1482, 1.485, 2.77154, -0.870986, -1.485, 2.87079, 1.14761, 1.485, 2.77154, 0.8704, -1.485, 2.87079, -0.870986, 1.485, 2.87079, -0.585552, -1.485, 2.94186, 0.8704, 1.485, 2.87079, 0.584965, -1.485, 2.94186, -0.585552, 1.485, 2.94186, -0.294244, -1.485, 2.98532, 0.584965, 1.485, 2.94186, 0.293657, -1.485, 2.98532, -0.294244, 1.485, 2.98532, -0.000586987, -1.485, 2.99941, 0.293657, 1.485, 2.98532, -0.000586987, 1.485, 2.99941)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0dvah"]
+albedo_color = Color(0.431373, 1, 1, 1)
+albedo_texture = ExtResource("4_1nvrl")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dcrof"]
+albedo_color = Color(0.0392157, 0.529412, 1, 1)
+albedo_texture = ExtResource("4_1nvrl")
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4ncl"]
+albedo_color = Color(0, 0.105882, 1, 1)
+albedo_texture = ExtResource("4_1nvrl")
+metallic = 1.0
+uv1_triplanar = true
 
 [node name="test_site2" instance=ExtResource("1_j6ih6")]
 
@@ -70,3 +90,32 @@ surface_material_override/0 = ExtResource("3_0dvah")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="base" index="1"]
 shape = SubResource("ConvexPolygonShape3D_1nvrl")
+
+[node name="friction_slope-1" parent="." index="8"]
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="StaticBody3D" parent="friction_slope-1" index="0"]
+metadata/friction = 1.0
+
+[node name="friction_slope-2" parent="." index="9"]
+surface_material_override/0 = SubResource("StandardMaterial3D_0dvah")
+
+[node name="StaticBody3D" parent="friction_slope-2" index="0"]
+metadata/friction = 0.6
+
+[node name="friction_slope-3" parent="." index="10"]
+surface_material_override/0 = SubResource("StandardMaterial3D_dcrof")
+metadata/friction = 0.2
+
+[node name="StaticBody3D" parent="friction_slope-3" index="0"]
+metadata/friction = 0.4
+
+[node name="friction_slope-4" parent="." index="11"]
+surface_material_override/0 = SubResource("StandardMaterial3D_a4ncl")
+metadata/friction = 0.05
+
+[node name="StaticBody3D" parent="friction_slope-4" index="0"]
+metadata/friction = 0.1
+
+[node name="rotator_001" parent="." index="12"]
+surface_material_override/0 = ExtResource("3_0dvah")

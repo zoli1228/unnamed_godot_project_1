@@ -153,7 +153,6 @@ func _physics_process(delta: float) -> void:
 
 func delayed_update():
 	handle_debug_hud()
-	print(crouch_deepness)
 
 func handle_debug_hud():
 	debug_box.get_child(0).text = "fps:   %s" % Engine.get_frames_per_second()
