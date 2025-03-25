@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://s6ww4bswcmop"]
+
+[ext_resource type="PackedScene" uid="uid://dvaow7k72cron" path="res://models/test_site2.glb" id="1_j6ih6"]
+[ext_resource type="Material" uid="uid://b8kacb4du3kre" path="res://materials/dev_gray_mat.tres" id="2_1nvrl"]
+[ext_resource type="Material" uid="uid://bergri1ojjf2x" path="res://materials/dev_orange_mat.tres" id="3_0dvah"]
+
+[sub_resource type="GDScript" id="GDScript_j6ih6"]
+script/source = "extends MeshInstance3D
+
+func _physics_process(delta: float) -> void:
+	rotation.z -= delta * 0.2
+	rotation_degrees.x += sin(Time.get_ticks_msec() / 1000.0) * delta
+"
+
+[sub_resource type="BoxMesh" id="BoxMesh_j6ih6"]
+size = Vector3(0.325, 3.815, 34.565)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_j6ih6"]
+points = PackedVector3Array(-0.1625, -1.9075, -17.2825, 0.1625, -1.9075, -17.2825, -0.1625, -1.9075, 17.2825, -0.1625, 1.9075, -17.2825, 0.1625, 1.9075, -17.2825, 0.1625, -1.9075, 17.2825, -0.1625, 1.9075, 17.2825, 0.1625, 1.9075, 17.2825)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1nvrl"]
+top_radius = 3.0
+bottom_radius = 3.0
+height = 2.97
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1nvrl"]
+points = PackedVector3Array(-0.000586987, -1.485, -3, -0.294244, -1.485, -2.9859, -0.000586987, 1.485, -3, 0.293657, -1.485, -2.9859, -0.294244, 1.485, -2.9859, -0.585552, -1.485, -2.94244, 0.293657, 1.485, -2.9859, 0.584965, -1.485, -2.94244, -0.585552, 1.485, -2.94244, -0.870986, -1.485, -2.87138, 0.584965, 1.485, -2.94244, 0.8704, -1.485, -2.87138, -0.870986, 1.485, -2.87138, -1.1482, -1.485, -2.77212, 0.8704, 1.485, -2.87138, 1.14761, -1.485, -2.77212, -1.1482, 1.485, -2.77212, -1.41425, -1.485, -2.64585, 1.14761, 1.485, -2.77212, 1.41367, -1.485, -2.64585, -1.41425, 1.485, -2.64585, -1.6668, -1.485, -2.49491, 1.41367, 1.485, -2.64585, 1.66621, -1.485, -2.49491, -1.6668, 1.485, -2.49491, -1.90348, -1.485, -2.3193, 1.66621, 1.485, -2.49491, 1.9029, -1.485, -2.3193, -1.90348, 1.485, -2.3193, -2.12138, -1.485, -2.12138, 1.9029, 1.485, -2.3193, 2.12079, -1.485, -2.12138, -2.12138, 1.485, -2.12138, -2.3193, -1.485, -1.90348, 2.12079, 1.485, -2.12138, 2.31872, -1.485, -1.90348, -2.3193, 1.485, -1.90348, -2.49491, -1.485, -1.6668, 2.31872, 1.485, -1.90348, 2.49432, -1.485, -1.6668, -2.49491, 1.485, -1.6668, -2.64585, -1.485, -1.41425, 2.49432, 1.485, -1.6668, 2.64526, -1.485, -1.41425, -2.64585, 1.485, -1.41425, -2.77212, -1.485, -1.1482, 2.64526, 1.485, -1.41425, 2.77154, -1.485, -1.1482, -2.77212, 1.485, -1.1482, -2.87138, -1.485, -0.870986, 2.77154, 1.485, -1.1482, 2.87079, -1.485, -0.870986, -2.87138, 1.485, -0.870986, -2.94244, -1.485, -0.585552, 2.87079, 1.485, -0.870986, 2.94186, -1.485, -0.585552, -2.94244, 1.485, -0.585552, -2.9859, -1.485, -0.294244, 2.94186, 1.485, -0.585552, 2.98532, -1.485, -0.294244, -2.9859, 1.485, -0.294244, -3, -1.485, -0.000586987, 2.98532, 1.485, -0.294244, 2.99941, -1.485, -0.000586987, -3, 1.485, -0.000586987, -2.9859, -1.485, 0.293657, 2.99941, 1.485, -0.000586987, 2.98532, -1.485, 0.293657, -2.9859, 1.485, 0.293657, -2.94244, -1.485, 0.584965, 2.98532, 1.485, 0.293657, 2.94186, -1.485, 0.584965, -2.94244, 1.485, 0.584965, -2.87138, -1.485, 0.8704, 2.94186, 1.485, 0.584965, 2.87079, -1.485, 0.8704, -2.87138, 1.485, 0.8704, -2.77212, -1.485, 1.14761, 2.87079, 1.485, 0.8704, 2.77154, -1.485, 1.14761, -2.77212, 1.485, 1.14761, -2.64585, -1.485, 1.41367, 2.77154, 1.485, 1.14761, 2.64526, -1.485, 1.41367, -2.64585, 1.485, 1.41367, -2.49491, -1.485, 1.66621, 2.64526, 1.485, 1.41367, 2.49432, -1.485, 1.66621, -2.49491, 1.485, 1.66621, -2.3193, -1.485, 1.9029, 2.49432, 1.485, 1.66621, 2.31872, -1.485, 1.9029, -2.3193, 1.485, 1.9029, -2.12138, -1.485, 2.12079, 2.31872, 1.485, 1.9029, 2.12079, -1.485, 2.12079, -2.12138, 1.485, 2.12079, -1.90348, -1.485, 2.31872, 2.12079, 1.485, 2.12079, 1.9029, -1.485, 2.31872, -1.90348, 1.485, 2.31872, -1.6668, -1.485, 2.49432, 1.9029, 1.485, 2.31872, 1.66621, -1.485, 2.49432, -1.6668, 1.485, 2.49432, -1.41425, -1.485, 2.64526, 1.66621, 1.485, 2.49432, 1.41367, -1.485, 2.64526, -1.41425, 1.485, 2.64526, -1.1482, -1.485, 2.77154, 1.41367, 1.485, 2.64526, 1.14761, -1.485, 2.77154, -1.1482, 1.485, 2.77154, -0.870986, -1.485, 2.87079, 1.14761, 1.485, 2.77154, 0.8704, -1.485, 2.87079, -0.870986, 1.485, 2.87079, -0.585552, -1.485, 2.94186, 0.8704, 1.485, 2.87079, 0.584965, -1.485, 2.94186, -0.585552, 1.485, 2.94186, -0.294244, -1.485, 2.98532, 0.584965, 1.485, 2.94186, 0.293657, -1.485, 2.98532, -0.294244, 1.485, 2.98532, -0.000586987, -1.485, 2.99941, 0.293657, 1.485, 2.98532, -0.000586987, 1.485, 2.99941)
+
+[node name="test_site2" instance=ExtResource("1_j6ih6")]
+
+[node name="floor" parent="." index="0"]
+surface_material_override/0 = ExtResource("2_1nvrl")
+
+[node name="round_stairs" parent="." index="1"]
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="abnormal_stairs" parent="." index="2"]
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="big_stairs" parent="." index="3"]
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="pillar" parent="." index="4"]
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="rotator" parent="." index="5"]
+surface_material_override/0 = ExtResource("3_0dvah")
+script = SubResource("GDScript_j6ih6")
+
+[node name="unstable_floor" type="RigidBody3D" parent="." index="6"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 26.9843, 6.53956, 42.0656)
+mass = 20.0
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="unstable_floor" index="0"]
+mesh = SubResource("BoxMesh_j6ih6")
+skeleton = NodePath("../../base/MeshInstance3D")
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="unstable_floor" index="1"]
+shape = SubResource("ConvexPolygonShape3D_j6ih6")
+
+[node name="base" type="RigidBody3D" parent="." index="7"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 26.9843, 3, 42.0656)
+mass = 200.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="base" index="0"]
+mesh = SubResource("CylinderMesh_1nvrl")
+skeleton = NodePath("../..")
+surface_material_override/0 = ExtResource("3_0dvah")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="base" index="1"]
+shape = SubResource("ConvexPolygonShape3D_1nvrl")

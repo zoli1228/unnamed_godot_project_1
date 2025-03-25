@@ -17,7 +17,7 @@ extends RigidBody3D
 ##Offsets the floor raycasts, leave at zero for everyday usage.
 @export var height_offset_from_base := 0.00
 ##Force applied to keep the player at a constant height above ground.
-@export var float_strength := 12.0
+@export var float_strength := 15.0
 ##This was a test to see what works best, but oh man shapecast messes up slope calculation baaadly. Do not attempt.
 @export var use_shapecast_instead_of_raycast := false
 
@@ -153,6 +153,7 @@ func _physics_process(delta: float) -> void:
 
 func delayed_update():
 	handle_debug_hud()
+	print(crouch_deepness)
 
 func handle_debug_hud():
 	debug_box.get_child(0).text = "fps:   %s" % Engine.get_frames_per_second()
@@ -206,11 +207,12 @@ func _integrate_forces(_p_state: PhysicsDirectBodyState3D) -> void:
 			linear_velocity.y += (collision_distance - crouch_deepness + height_offset_from_base) * float_strength
 
 			# Making sure that running down on slopes is possible
-			var vertical_force = -linear_velocity.y + (30.0 * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
-			apply_central_force(Vector3(0.0, vertical_force, 0.0) * 20.0)
+			#var vertical_force = -linear_velocity.y + (30.0 * mass * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
+			var vertical_force = -linear_velocity.y + (mass * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
+			apply_central_force(Vector3(0.0, vertical_force, 0.0) * 30.0 * mass)
 
 		# DAMPENING
-		apply_central_force((Vector3(-linear_velocity.x, 0.0, -linear_velocity.z) * horizontal_dampening) * current_friction * (1.05 - float(is_sliding)))
+		apply_central_force((Vector3(-linear_velocity.x, 0.0, -linear_velocity.z) * horizontal_dampening) * mass * current_friction * (1.05 - float(is_sliding)))
 
 	else:
 		# While player is in the air, these values should be 0.0
@@ -240,7 +242,7 @@ func jump(force: float):
 	floor_ray_length = -1.0
 
 	linear_velocity = Vector3.ZERO
-	linear_velocity.y += force * mass
+	linear_velocity.y += force
 	linear_velocity += global_velocity * 50.0
 
 	await get_tree().create_timer(1.0).timeout
@@ -291,8 +293,10 @@ func handle_friction():
 			current_friction = current_surface.get_meta(&"friction")
 
 func handle_crouched_mode():
+	var tw = create_tween()
 	if is_crouched:
-		var tw = create_tween()
+		tw.stop()
+		tw = create_tween()
 		tw.set_parallel(true)
 		tw.tween_property(player_collider, "shape:height", player_original_height / 2.0, crouch_transition_duration)
 		tw.tween_property(player_mesh, "mesh:height", player_original_height / 2.0, crouch_transition_duration)
@@ -300,11 +304,12 @@ func handle_crouched_mode():
 
 
 	else:
-		var tw = create_tween()
+		tw.stop()
+		tw = create_tween()
 		tw.set_parallel(true)
-		tw.tween_property(player_collider, "shape:height", player_original_height, 0.2)
-		tw.tween_property(player_mesh, "mesh:height", player_original_height, 0.2)
-		tw.tween_property(self, "crouch_deepness", 0.0, 0.2)
+		tw.tween_property(player_collider, "shape:height", player_original_height, crouch_transition_duration)
+		tw.tween_property(player_mesh, "mesh:height", player_original_height, crouch_transition_duration)
+		tw.tween_property(self, "crouch_deepness", 0.0, crouch_transition_duration)
 
 func handle_stuck_protection():
 	if get_colliding_bodies().size() > 1 && linear_velocity.y < 0.5 && !is_grounded:
@@ -333,6 +338,8 @@ func handle_moving_platforms() -> void:
 	if current_surface != old_surface:
 		call_deferred("reparent", current_surface)
 		old_surface = current_surface
+	if current_surface is RigidBody3D:
+		current_surface.apply_force(Vector3.DOWN * mass, current_surface.to_local(global_position))
 
 
 

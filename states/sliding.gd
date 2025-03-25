@@ -23,6 +23,8 @@ func enter(_player: RigidBody3D):
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(cam_effects, "rotation_degrees:z", 10.0, 0.5)
 	player.is_crouched = true
+	player.is_jumping = false
+
 
 func process(_delta: float) -> void:
 	#print(Vector3(player.linear_velocity.x, 0.0, player.linear_velocity.z).length_squared())

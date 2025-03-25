@@ -1,10 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://c20nsmbpmtyp4"]
+[gd_scene load_steps=3 format=3 uid="uid://drdh1356py42a"]
 
-[ext_resource type="PackedScene" uid="uid://d2bq1tc656bbb" path="res://models/rb_controller_test_map.glb" id="1_c13wx"]
 [ext_resource type="Material" uid="uid://b8kacb4du3kre" path="res://materials/dev_gray_mat.tres" id="2_iojis"]
 [ext_resource type="Material" uid="uid://bergri1ojjf2x" path="res://materials/dev_orange_mat.tres" id="3_ipivs"]
 
-[node name="rb_controller_test_map" instance=ExtResource("1_c13wx")]
+[node name="rb_controller_test_map"]
 
 [node name="floor" parent="." index="0"]
 surface_material_override/0 = ExtResource("2_iojis")
@@ -22,51 +21,6 @@ surface_material_override/0 = ExtResource("2_iojis")
 surface_material_override/0 = ExtResource("3_ipivs")
 
 [node name="box-rigid" parent="box-rigid" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_001" parent="@RigidBody3D@22756" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_002" parent="@RigidBody3D@22757" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_003" parent="@RigidBody3D@22758" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_004" parent="@RigidBody3D@22759" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_005" parent="@RigidBody3D@22760" index="0"]
-surface_material_override/0 = ExtResource("2_iojis")
-
-[node name="box-rigid_006" parent="@RigidBody3D@22761" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_007" parent="@RigidBody3D@22762" index="0"]
-surface_material_override/0 = ExtResource("2_iojis")
-
-[node name="box-rigid_008" parent="@RigidBody3D@22763" index="0"]
-surface_material_override/0 = ExtResource("2_iojis")
-
-[node name="box-rigid_009" parent="@RigidBody3D@22764" index="0"]
-surface_material_override/0 = ExtResource("2_iojis")
-
-[node name="box-rigid_010" parent="@RigidBody3D@22765" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_011" parent="@RigidBody3D@22766" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_012" parent="@RigidBody3D@22767" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_013" parent="@RigidBody3D@22768" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_014" parent="@RigidBody3D@22769" index="0"]
-surface_material_override/0 = ExtResource("3_ipivs")
-
-[node name="box-rigid_015" parent="@RigidBody3D@22770" index="0"]
 surface_material_override/0 = ExtResource("3_ipivs")
 
 [node name="torus" parent="." index="21"]

@@ -57,9 +57,12 @@ shadow_color = Color(0, 0, 0, 0.0431373)
 
 [node name="player_node" type="RigidBody3D" parent="."]
 disable_mode = 2
+collision_layer = 3
+collision_mask = 3
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+mass = 80.0
 physics_material_override = ExtResource("1_4m5hh")
 can_sleep = false
 continuous_cd = true
