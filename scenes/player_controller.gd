@@ -18,6 +18,8 @@ extends RigidBody3D
 @export var height_offset_from_base := 0.00
 ##Force applied to keep the player at a constant height above ground.
 @export var float_strength := 15.0
+##This controlls the 'springiness' of the floating logic.
+@export var float_dampening := 30.0
 ##This was a test to see what works best, but oh man shapecast messes up slope calculation baaadly. Do not attempt.
 @export var use_shapecast_instead_of_raycast := false
 
@@ -43,6 +45,11 @@ extends RigidBody3D
 @onready var unstuck_timer: Timer = $unstuck_timer
 @onready var debug_box: VBoxContainer = $"../DEBUG/VBoxContainer"
 @onready var rayarray = [$ray_container/floor_ray, $ray_container/ray_left, $ray_container/ray_right, $ray_container/ray_back, $ray_container/ray_forward]
+@onready var max_fall_speed_label: Label = $"../DEBUG/max_fall_speed"
+
+
+signal landed(vertical_velocity: float)
+
 var is_grounded := false
 var states = []
 var state = null
@@ -64,6 +71,9 @@ var player_original_ray_length := 0.0
 var global_velocity = Vector3.ZERO
 var previous_position = Vector3.ZERO
 var active_ray = null
+var ray_collision_point = Vector3.ZERO
+var debug_max_fall_speed := 0.0
+var is_dead = false
 
 func _ready() -> void:
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -105,16 +115,19 @@ func change_state(new_state: int) -> void:
 	handle_crouched_mode()
 
 func _process(_delta: float) -> void:
-	mouse_look()
 	if delay_counter >= debug_hud_update_delay:
 		delayed_update()
 		delay_counter = 0
 	delay_counter += 1
 
+
 	# Camera smoothing / lagging behind actual player for smoothness
 	var difference = (camera_container.global_position - camera_positioner.global_position)
 	camera_container.global_position -= difference * 0.8
-
+	if is_dead:
+		camera_container.global_rotation = lerp(camera_container.global_rotation, global_rotation, 0.2)
+		return
+	mouse_look()
 	# Modules process
 	for module in active_modules:
 		module.update_module(_delta)
@@ -125,14 +138,20 @@ func _process(_delta: float) -> void:
 		change_state(4) # SLIDING
 	else:
 		is_over_slipping_threshold = false
+	if linear_velocity.y < debug_max_fall_speed:
+		debug_max_fall_speed = linear_velocity.y
+	if max_fall_speed_label:
+		max_fall_speed_label.text = "Maximum vertical speed: %s" % snappedf(debug_max_fall_speed, 0.01)
+
 
 func _physics_process(delta: float) -> void:
+
 	if Input.is_action_just_pressed("esc"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 		else:
 			Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-
+	if is_dead: return
 	# RB following camera container rotation
 	global_rotation.y -= (global_rotation.y - camera_container.global_rotation.y)
 	player_base.global_position = global_position
@@ -179,7 +198,7 @@ var slope_angle_global := 0.0
 
 func _integrate_forces(_p_state: PhysicsDirectBodyState3D) -> void:
 	# All physics movement should be handled in _integrate forces!!!
-
+	if is_dead: return
 	if is_grounded:
 		# Slope angle is calculated twice.
 		# Once for overall slope angle, and once for directional slope angle (where the player is facing).
@@ -207,10 +226,10 @@ func _integrate_forces(_p_state: PhysicsDirectBodyState3D) -> void:
 
 			# Making sure that running down on slopes is possible
 			#var vertical_force = -linear_velocity.y + (30.0 * mass * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
-			var vertical_force = -linear_velocity.y + (mass * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
-			apply_central_force(Vector3(0.0, vertical_force, 0.0) * 30.0 * mass)
+			var vertical_force = -linear_velocity.y + (20.0 * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
+			apply_central_force(Vector3(0.0, vertical_force, 0.0) * float_dampening * mass)
 
-		# DAMPENING
+		# HORIZONTAL DAMPENING
 		apply_central_force((Vector3(-linear_velocity.x, 0.0, -linear_velocity.z) * horizontal_dampening) * mass * current_friction * (1.05 - float(is_sliding)))
 
 	else:
@@ -222,12 +241,8 @@ func _integrate_forces(_p_state: PhysicsDirectBodyState3D) -> void:
 	aligner_old_y_pos = slope_aligner.global_position.y
 
 
-
 	#Move player
-	if is_sliding:
-		linear_velocity += (move_input.z * global_basis.z + move_input.x * global_basis.x) * current_friction * movement_speed_modifier
-	else:
-		linear_velocity += (move_input.z * slope_aligner.global_basis.z + move_input.x * slope_aligner.global_basis.x) * current_friction * movement_speed_modifier
+	linear_velocity += (move_input.z * slope_aligner.global_basis.z + move_input.x * slope_aligner.global_basis.x) * current_friction * movement_speed_modifier
 	global_rotation.z = 0.0
 	global_rotation.x = 0.0
 	handle_stuck_protection()
@@ -244,7 +259,7 @@ func jump(force: float):
 	linear_velocity.y += force
 	linear_velocity += global_velocity * 50.0
 
-	await get_tree().create_timer(1.0).timeout
+	await get_tree().create_timer(0.5).timeout
 	is_jumping = false
 
 
@@ -268,10 +283,12 @@ func handle_floor_ray():
 				is_grounded = true
 				current_surface = ray.get_collider()
 				active_ray = ray
+				ray_collision_point = ray.get_collision_point()
 				break
 			else:
 				active_ray = null
 				current_surface = null
+				ray_collision_point = global_position - Vector3(0.0, floor_ray_length, 0.0)
 
 
 func handle_slope_calculation():

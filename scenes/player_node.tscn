@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b05sp5l322hwj"]
+[gd_scene load_steps=21 format=3 uid="uid://b05sp5l322hwj"]
 
 [ext_resource type="Script" uid="uid://4veva7m8odhu" path="res://scenes/player_controller.gd" id="1_0upji"]
 [ext_resource type="PhysicsMaterial" uid="uid://cddgcfgky4cvy" path="res://resources/player_node_physical_material.tres" id="1_4m5hh"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://cseqn5bviowfh" path="res://states/sliding.gd" id="7_6qaro"]
 [ext_resource type="Script" uid="uid://b2m7fipxxh1qp" path="res://states/crouching.gd" id="8_fuo7r"]
 [ext_resource type="Script" uid="uid://dum6vxg0thpke" path="res://scripts/headbob.gd" id="9_7u8l0"]
+[ext_resource type="Script" uid="uid://2hmcanofqvd7" path="res://states/dead.gd" id="9_u8001"]
+[ext_resource type="Script" uid="uid://7cxawy7gdi38" path="res://scripts/health_system.gd" id="10_xhk2o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0upji"]
 radius = 0.25
@@ -114,10 +116,16 @@ script = ExtResource("7_6qaro")
 [node name="crouching" type="Node" parent="player_node/Extensions/StateMachine"]
 script = ExtResource("8_fuo7r")
 
+[node name="dead" type="Node" parent="player_node/Extensions/StateMachine"]
+script = ExtResource("9_u8001")
+
 [node name="Modules" type="Node" parent="player_node/Extensions"]
 
 [node name="Headbob" type="Node" parent="player_node/Extensions/Modules"]
 script = ExtResource("9_7u8l0")
+
+[node name="HealthSystem" type="Node" parent="player_node/Extensions/Modules"]
+script = ExtResource("10_xhk2o")
 
 [node name="cam_container" type="Node3D" parent="player_node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -252,5 +260,15 @@ label_settings = SubResource("LabelSettings_fuo7r")
 layout_mode = 2
 text = "DEBUG_LABEL"
 label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="max_fall_speed" type="Label" parent="DEBUG"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+horizontal_alignment = 1
 
 [connection signal="timeout" from="player_node/unstuck_timer" to="player_node" method="_on_unstuck_timer_timeout"]

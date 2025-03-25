@@ -23,9 +23,11 @@ func process(_delta: float) -> void:
 	if Settings.toggle_crouch:
 		if Input.is_action_just_pressed("crouch"):
 			player.change_state(1)
+			return
 	else:
 		if !Input.is_action_pressed("crouch"):
 			player.change_state(1)
+			return
 
 func leave():
 	player.is_crouched = false

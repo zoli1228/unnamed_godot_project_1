@@ -17,12 +17,15 @@ func process(_delta: float) -> void:
 	player.move_input = direction.normalized() * movement_speed
 	if abs(direction.length()) < 0.1:
 		player.change_state(0)
+		return
 	if Input.is_action_just_pressed("jump"):
 		player.jump(jump_force)
 	if Input.is_action_pressed("sprint"):
 		player.change_state(3)
+		return
 	if Input.is_action_just_pressed("crouch"):
 		player.change_state(5)
+		return
 
 func leave():
 	pass

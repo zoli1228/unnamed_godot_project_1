@@ -35,8 +35,10 @@ func process(_delta: float) -> void:
 		if !player.is_over_slipping_threshold:
 			if was_player_crouched:
 				player.change_state(5)
+				return
 			else:
 				player.change_state(1)
+				return
 
 func leave():
 	if tw:

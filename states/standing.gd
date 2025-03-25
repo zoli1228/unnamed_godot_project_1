@@ -18,8 +18,10 @@ func process(_delta: float) -> void:
 		player.jump(jump_force)
 	if Input.is_action_just_pressed("crouch"):
 		player.change_state(5)
+		return
 	if abs(direction.length()) > 0.0:
 		player.change_state(1)
+		return
 
 func leave():
 	pass
