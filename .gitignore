@@ -1,0 +1,4 @@
+.git/
+.godot/
+sounds/
+*.import

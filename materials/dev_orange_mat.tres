@@ -8,4 +8,3 @@ albedo_texture = ExtResource("1_l515x")
 normal_enabled = true
 normal_texture = ExtResource("2_w8l7v")
 uv1_triplanar = true
-uv1_world_triplanar = true
