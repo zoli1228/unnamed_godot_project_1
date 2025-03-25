@@ -1,6 +1,6 @@
 extends Node
 
-@export var movement_speed = 2.0
+@export var movement_speed = 1.5
 @export var jump_force := 4.0
 var input_dir := Vector2.ZERO
 var player : RigidBody3D = null
