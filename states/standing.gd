@@ -16,6 +16,7 @@ func process(_delta: float) -> void:
 	var direction = Vector3(input_dir.x, 0.0, input_dir.y)
 	if Input.is_action_just_pressed("jump"):
 		player.jump(jump_force)
+		return
 	if Input.is_action_just_pressed("crouch"):
 		player.change_state(5)
 		return

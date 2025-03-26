@@ -46,4 +46,8 @@ func take_fall_damage(vertical_velocity: float):
 	if abs(vertical_velocity) < fall_damage_threshold_velocity: return
 	landing_y_position = player.ray_collision_point.y
 	fall_speed = vertical_velocity
-	do_sample = true
+	#do_sample = true #This was a test to account for landing on a moving surface.
+	var amt = int(abs(fall_speed * fall_damage_multiplier))
+	amt *= amt
+	health -= amt
+	print("Taken fall damage, remaining hp: %s" % health)

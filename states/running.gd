@@ -20,6 +20,7 @@ func process(_delta: float) -> void:
 		return
 	if Input.is_action_just_pressed("jump"):
 		player.jump(jump_force)
+		return
 	if Input.is_action_just_released("sprint"):
 		player.change_state(1)
 		return

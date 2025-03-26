@@ -17,9 +17,9 @@ extends RigidBody3D
 ##Offsets the floor raycasts, leave at zero for everyday usage.
 @export var height_offset_from_base := 0.00
 ##Force applied to keep the player at a constant height above ground.
-@export var float_strength := 15.0
+@export var float_strength := 25.0
 ##This controlls the 'springiness' of the floating logic.
-@export var float_dampening := 30.0
+@export var float_dampening := 35.0
 ##This was a test to see what works best, but oh man shapecast messes up slope calculation baaadly. Do not attempt.
 @export var use_shapecast_instead_of_raycast := false
 
@@ -31,7 +31,6 @@ extends RigidBody3D
 @onready var camera_positioner = $camera_positioner
 @onready var camera_container = $cam_container
 @onready var module_container = $Extensions/Modules
-@onready var floor_ray: RayCast3D = $ray_container/floor_ray
 @onready var floor_shapecast: ShapeCast3D = $ray_container/floor_shapecast
 
 @onready var player_base: Node3D = $".."
@@ -44,7 +43,7 @@ extends RigidBody3D
 @onready var modules: Node = $Extensions/Modules
 @onready var unstuck_timer: Timer = $unstuck_timer
 @onready var debug_box: VBoxContainer = $"../DEBUG/VBoxContainer"
-@onready var rayarray = [$ray_container/floor_ray, $ray_container/ray_left, $ray_container/ray_right, $ray_container/ray_back, $ray_container/ray_forward]
+@onready var rayarray = [$ray_container/ray_center, $ray_container/ray_left, $ray_container/ray_right, $ray_container/ray_back, $ray_container/ray_forward, $ray_container/ray_back_left, $ray_container/ray_front_right, $ray_container/ray_back_right, $ray_container/ray_forward_left]
 @onready var max_fall_speed_label: Label = $"../DEBUG/max_fall_speed"
 
 
@@ -123,7 +122,7 @@ func _process(_delta: float) -> void:
 
 	# Camera smoothing / lagging behind actual player for smoothness
 	var difference = (camera_container.global_position - camera_positioner.global_position)
-	camera_container.global_position -= difference * 0.8
+	camera_container.global_position -= difference * 0.9
 	if is_dead:
 		camera_container.global_rotation = lerp(camera_container.global_rotation, global_rotation, 0.2)
 		return
@@ -133,7 +132,9 @@ func _process(_delta: float) -> void:
 		module.update_module(_delta)
 
 	# Slipping on slopes
-	if slope_angle_global + (1.0 - current_friction) * slope_angle_global > slope_slip_threshold_deg:
+	var slip_base = slope_angle_global + (1.0 - current_friction) * slope_angle_global
+
+	if slip_base > slope_slip_threshold_deg:
 		is_over_slipping_threshold = true
 		change_state(4) # SLIDING
 	else:
@@ -165,10 +166,10 @@ func _physics_process(delta: float) -> void:
 
 	handle_states(delta)
 	handle_floor_ray()
-	handle_slope_calculation()
 	handle_friction()
 	handle_moving_platforms()
 	handle_global_velocity()
+	handle_slope_calculation()
 
 func delayed_update():
 	handle_debug_hud()
@@ -217,16 +218,18 @@ func _integrate_forces(_p_state: PhysicsDirectBodyState3D) -> void:
 			slope_aligner_helper.global_position = floor_shapecast.get_collision_point(0) + Vector3(0.0, 0.01, 0.0)
 		else:
 			collision_distance = (active_ray.get_collision_point() - global_position).y
-			slope_aligner_helper.global_position = active_ray.get_collision_point() + Vector3(0.0, 0.01, 0.0)
+			#collision_distance = clamp(collision_distance, 0.016, 1.0)
+			slope_aligner_helper.global_position = active_ray.get_collision_point() + Vector3(0.0, 0.02, 0.0)
 
 
 		# Floating RB Controller logic
 		if !is_jumping && !is_sliding && !is_over_slipping_threshold:
 			linear_velocity.y += (collision_distance - crouch_deepness + height_offset_from_base) * float_strength
-
 			# Making sure that running down on slopes is possible
 			#var vertical_force = -linear_velocity.y + (30.0 * mass * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
-			var vertical_force = -linear_velocity.y + (20.0 * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
+
+			#var vertical_force = -linear_velocity.y + (20.0 * aligner_y_velocity * abs(deg_to_rad(slope_angle_directional)))
+			var vertical_force = -linear_velocity.y
 			apply_central_force(Vector3(0.0, vertical_force, 0.0) * float_dampening * mass)
 
 		# HORIZONTAL DAMPENING
@@ -265,6 +268,9 @@ func jump(force: float):
 
 # FLOOR RAY ARRAY TO BE IMPLEMENTED FOR INCREASED ACCURACY - SHAPECAST IS SHITE ##
 # Implemented, Shapecast is still SHITE
+# Raaays. Can't have enough RAAAAAYS!
+#...
+#Indeeeeed.
 func handle_floor_ray():
 	is_grounded = false
 	ray_container.global_rotation.y = global_rotation.y
@@ -276,19 +282,24 @@ func handle_floor_ray():
 			current_surface = floor_shapecast.get_collider(0)
 		else:
 			current_surface = null
+
 	# RAYCAST OPTIONS
 	else:
+		var ray_target_distance = 10.0
+		var any_ray_colliding = false
+		active_ray = null
+		current_surface = null
+		ray_collision_point = global_position - Vector3(0.0, floor_ray_length, 0.0)
 		for ray in rayarray:
 			if ray.is_colliding():
+				any_ray_colliding = true
 				is_grounded = true
 				current_surface = ray.get_collider()
-				active_ray = ray
 				ray_collision_point = ray.get_collision_point()
-				break
-			else:
-				active_ray = null
-				current_surface = null
-				ray_collision_point = global_position - Vector3(0.0, floor_ray_length, 0.0)
+				if ray.global_position.y - ray_collision_point.y < ray_target_distance:
+					active_ray = ray
+					ray_target_distance = ray.global_position.y - ray_collision_point.y
+
 
 
 func handle_slope_calculation():
@@ -296,7 +307,7 @@ func handle_slope_calculation():
 		if use_shapecast_instead_of_raycast:
 			slope_aligner_helper.look_at(floor_shapecast.get_collision_point(0) + floor_shapecast.get_collision_normal(0), global_basis.z)
 		else:
-			slope_aligner_helper.look_at(floor_ray.get_collision_point() + floor_ray.get_collision_normal(), global_basis.z)
+			slope_aligner_helper.look_at(active_ray.get_collision_point() + active_ray.get_collision_normal(), global_basis.z)
 	else:
 		slope_aligner_helper.global_rotation_degrees = global_rotation_degrees + Vector3(90.0, 0.0, 0.0)
 
