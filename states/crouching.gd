@@ -8,6 +8,8 @@ var player : RigidBody3D = null
 func enter(_player: RigidBody3D):
 	player = _player
 	player.is_crouched = true
+	player.is_jumping = false
+
 	print("Entered state: %s" % name)
 
 func process(_delta: float) -> void:
@@ -21,9 +23,11 @@ func process(_delta: float) -> void:
 	if Settings.toggle_crouch:
 		if Input.is_action_just_pressed("crouch"):
 			player.change_state(1)
+			return
 	else:
 		if !Input.is_action_pressed("crouch"):
 			player.change_state(1)
+			return
 
 func leave():
-	pass
+	player.is_crouched = false

@@ -7,6 +7,8 @@ var player : RigidBody3D = null
 func enter(_player: RigidBody3D):
 	player = _player
 	player.is_crouched = false
+	player.is_jumping = false
+
 	print("Entered state: %s" % name)
 
 func process(_delta: float) -> void:
@@ -14,10 +16,13 @@ func process(_delta: float) -> void:
 	var direction = Vector3(input_dir.x, 0.0, input_dir.y)
 	if Input.is_action_just_pressed("jump"):
 		player.jump(jump_force)
+		return
 	if Input.is_action_just_pressed("crouch"):
 		player.change_state(5)
+		return
 	if abs(direction.length()) > 0.0:
 		player.change_state(1)
+		return
 
 func leave():
 	pass

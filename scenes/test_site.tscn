@@ -1,13 +1,11 @@
-[gd_scene load_steps=33 format=3 uid="uid://m68o7wsb08kw"]
+[gd_scene load_steps=33 format=3 uid="uid://cmmlia52cjeku"]
 
 [ext_resource type="Texture2D" uid="uid://v48ry4283thv" path="res://textures/dev/dev_tile_orange.png" id="1_6aokb"]
 [ext_resource type="Material" uid="uid://b8kacb4du3kre" path="res://materials/dev_gray_mat.tres" id="1_v5x8f"]
-[ext_resource type="Texture2D" uid="uid://db7fl0qucso2p" path="res://textures/floors/office-carpet-fabric1-bl/office-carpet-fabric_normal-ogl.png" id="2_vmlt5"]
 [ext_resource type="PackedScene" uid="uid://b05sp5l322hwj" path="res://scenes/player_node.tscn" id="3_vmlt5"]
 [ext_resource type="PackedScene" uid="uid://o06w2imabt4r" path="res://test_stuff/stairs_1.tscn" id="3_xwiga"]
 [ext_resource type="PackedScene" uid="uid://dj0f12v3i57d5" path="res://scenes/moving_platform.tscn" id="5_76ovx"]
-[ext_resource type="Texture2D" uid="uid://r0bnlaho1shs" path="res://textures/ceilings/casette-ceiling-1/casette_normal_opengl_2k.png" id="6_3o6g8"]
-[ext_resource type="PackedScene" uid="uid://c20nsmbpmtyp4" path="res://scenes/rb_controller_test_map.tscn" id="6_fmb3w"]
+[ext_resource type="PackedScene" uid="uid://drdh1356py42a" path="res://scenes/rb_controller_test_map.tscn" id="6_fmb3w"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_vmlt5"]
 sky_horizon_color = Color(0.662243, 0.671743, 0.686743, 1)
@@ -40,11 +38,14 @@ size = Vector3(5.03, 0.28, 25.57)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_v5x8f"]
 points = PackedVector3Array(2.515, 0.14, 12.785, 2.515, -0.14, 12.785, 2.515, 0.14, -12.785, -2.515, 0.14, 12.785, -2.515, -0.14, 12.785, 2.515, -0.14, -12.785, -2.515, 0.14, -12.785, -2.515, -0.14, -12.785)
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ms375"]
+load_path = "res://.godot/imported/office-carpet-fabric_normal-ogl.png-fc7c1fe7521b33008a7e6a20ca3dfd2c.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v5x8f"]
 albedo_color = Color(0, 1, 1, 1)
 albedo_texture = ExtResource("1_6aokb")
 normal_enabled = true
-normal_texture = ExtResource("2_vmlt5")
+normal_texture = SubResource("CompressedTexture2D_ms375")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
@@ -57,7 +58,7 @@ points = PackedVector3Array(2.7125, 0.14, 37.12, 2.7125, -0.14, 37.12, 2.7125, 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fmb3w"]
 albedo_texture = ExtResource("1_6aokb")
 normal_enabled = true
-normal_texture = ExtResource("2_vmlt5")
+normal_texture = SubResource("CompressedTexture2D_ms375")
 uv1_triplanar = true
 uv1_world_triplanar = true
 
@@ -66,15 +67,30 @@ script/source = "extends Node3D
 
 @onready var platform_anim: AnimationPlayer = $moving_platform/platform_anim
 
-func _on_platform_trigger_bottom_body_entered(body: Node3D) -> void:
+func _on_platform_trigger_bottom_body_entered(_body: Node3D) -> void:
 	if !platform_anim.is_playing():
 		platform_anim.play(\"travel\")
 
 
-func _on_platform_trigger_top_body_entered(body: Node3D) -> void:
+func _on_platform_trigger_top_body_entered(_body: Node3D) -> void:
 	if !platform_anim.is_playing():
 		platform_anim.play_backwards(\"travel\")
 "
+
+[sub_resource type="Animation" id="Animation_dtx8j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-22.6167, -51.3162, -93.195)]
+}
 
 [sub_resource type="Animation" id="Animation_3o6g8"]
 resource_name = "travel"
@@ -92,21 +108,6 @@ tracks/0/keys = {
 "values": [Vector3(-22.6167, -51.3162, -93.195), Vector3(-22.6167, -5.01045, -30.6524)]
 }
 
-[sub_resource type="Animation" id="Animation_dtx8j"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-22.6167, -51.3162, -93.195)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_sc22e"]
 _data = {
 &"RESET": SubResource("Animation_dtx8j"),
@@ -115,10 +116,13 @@ _data = {
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b4mvd"]
 
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_fmb3w"]
+load_path = "res://.godot/imported/casette_normal_opengl_2k.png-7c5cf0ff97e3f60bb59a7915723db956.ctex"
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc22e"]
 albedo_color = Color(1, 0.384314, 0, 1)
 normal_enabled = true
-normal_texture = ExtResource("6_3o6g8")
+normal_texture = SubResource("CompressedTexture2D_fmb3w")
 uv1_scale = Vector3(1.644, 1.644, 1.644)
 
 [sub_resource type="BoxMesh" id="BoxMesh_b4mvd"]
@@ -131,7 +135,7 @@ size = Vector3(4, 0.0915527, 4)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3o6g8"]
 albedo_texture = ExtResource("1_6aokb")
 normal_enabled = true
-normal_texture = ExtResource("2_vmlt5")
+normal_texture = SubResource("CompressedTexture2D_ms375")
 uv1_triplanar = true
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_dtx8j"]
@@ -388,6 +392,22 @@ constant_torque = Vector3(0, 31.2, 0)
 mesh = SubResource("BoxMesh_b4mvd")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MAP/DYNAMIC/rotating_rb_platform2"]
+shape = SubResource("BoxShape3D_s2rxk")
+
+[node name="rotating_rb_platform3" type="RigidBody3D" parent="MAP/DYNAMIC"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23.5171, 0.273539, 5.53758)
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+can_sleep = false
+freeze_mode = 1
+angular_damp = 7.727
+constant_torque = Vector3(0, 100, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MAP/DYNAMIC/rotating_rb_platform3"]
+mesh = SubResource("BoxMesh_b4mvd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MAP/DYNAMIC/rotating_rb_platform3"]
 shape = SubResource("BoxShape3D_s2rxk")
 
 [node name="player_node" parent="." instance=ExtResource("3_vmlt5")]

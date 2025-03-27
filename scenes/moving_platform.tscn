@@ -1,12 +1,14 @@
 [gd_scene load_steps=6 format=3 uid="uid://dj0f12v3i57d5"]
 
 [ext_resource type="Texture2D" uid="uid://v48ry4283thv" path="res://textures/dev/dev_tile_orange.png" id="1_1tdcd"]
-[ext_resource type="Texture2D" uid="uid://db7fl0qucso2p" path="res://textures/floors/office-carpet-fabric1-bl/office-carpet-fabric_normal-ogl.png" id="2_mb26n"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ms375"]
+load_path = "res://.godot/imported/office-carpet-fabric_normal-ogl.png-fc7c1fe7521b33008a7e6a20ca3dfd2c.ctex"
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afg43"]
 albedo_texture = ExtResource("1_1tdcd")
 normal_enabled = true
-normal_texture = ExtResource("2_mb26n")
+normal_texture = SubResource("CompressedTexture2D_ms375")
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_pgg5x"]

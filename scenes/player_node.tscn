@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://b05sp5l322hwj"]
+[gd_scene load_steps=21 format=3 uid="uid://b05sp5l322hwj"]
 
 [ext_resource type="Script" uid="uid://4veva7m8odhu" path="res://scenes/player_controller.gd" id="1_0upji"]
 [ext_resource type="PhysicsMaterial" uid="uid://cddgcfgky4cvy" path="res://resources/player_node_physical_material.tres" id="1_4m5hh"]
@@ -9,6 +9,8 @@
 [ext_resource type="Script" uid="uid://cseqn5bviowfh" path="res://states/sliding.gd" id="7_6qaro"]
 [ext_resource type="Script" uid="uid://b2m7fipxxh1qp" path="res://states/crouching.gd" id="8_fuo7r"]
 [ext_resource type="Script" uid="uid://dum6vxg0thpke" path="res://scripts/headbob.gd" id="9_7u8l0"]
+[ext_resource type="Script" uid="uid://2hmcanofqvd7" path="res://states/dead.gd" id="9_u8001"]
+[ext_resource type="Script" uid="uid://7cxawy7gdi38" path="res://scripts/health_system.gd" id="10_xhk2o"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_0upji"]
 radius = 0.25
@@ -39,13 +41,6 @@ height = 0.05
 [sub_resource type="CylinderMesh" id="CylinderMesh_0oqto"]
 top_radius = 0.0
 
-[sub_resource type="LabelSettings" id="LabelSettings_fuo7r"]
-font_size = 26
-outline_size = 10
-outline_color = Color(0, 0, 0, 1)
-shadow_size = 15
-shadow_color = Color(0, 0, 0, 0.0431373)
-
 [sub_resource type="BoxMesh" id="BoxMesh_f5igj"]
 size = Vector3(0.185, 0.225, 0.305)
 
@@ -53,27 +48,37 @@ size = Vector3(0.185, 0.225, 0.305)
 height = 1.0
 radius = 0.2
 
+[sub_resource type="LabelSettings" id="LabelSettings_fuo7r"]
+font_size = 26
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+shadow_size = 15
+shadow_color = Color(0, 0, 0, 0.0431373)
+
 [node name="player_base" type="Node3D"]
 
 [node name="player_node" type="RigidBody3D" parent="."]
 disable_mode = 2
+collision_layer = 3
+collision_mask = 3
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
+mass = 80.0
 physics_material_override = ExtResource("1_4m5hh")
 can_sleep = false
 continuous_cd = true
 contact_monitor = true
 max_contacts_reported = 2
 linear_damp_mode = 1
-linear_damp = 0.1
+linear_damp = 0.05
 script = ExtResource("1_0upji")
-max_look_up_degrees = 89.0
-float_strength = 15.0
+debug_hud_update_delay = 5.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="player_node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.15, 0)
 shape = SubResource("CapsuleShape3D_0upji")
+debug_color = Color(0, 0.6, 1, 1)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="player_node/CollisionShape3D"]
 visible = false
@@ -82,10 +87,10 @@ skeleton = NodePath("")
 
 [node name="slope_aligner_helper" type="Node3D" parent="player_node"]
 transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, 0, 0)
+visible = false
 
 [node name="slope_aligner" type="MeshInstance3D" parent="player_node/slope_aligner_helper"]
 transform = Transform3D(1, 0, 0, 0, 1.31134e-07, 1, 0, -1, 1.31134e-07, 0, 0, 0)
-visible = false
 mesh = SubResource("PlaneMesh_4m5hh")
 skeleton = NodePath("../..")
 
@@ -112,10 +117,16 @@ script = ExtResource("7_6qaro")
 [node name="crouching" type="Node" parent="player_node/Extensions/StateMachine"]
 script = ExtResource("8_fuo7r")
 
+[node name="dead" type="Node" parent="player_node/Extensions/StateMachine"]
+script = ExtResource("9_u8001")
+
 [node name="Modules" type="Node" parent="player_node/Extensions"]
 
 [node name="Headbob" type="Node" parent="player_node/Extensions/Modules"]
 script = ExtResource("9_7u8l0")
+
+[node name="HealthSystem" type="Node" parent="player_node/Extensions/Modules"]
+script = ExtResource("10_xhk2o")
 
 [node name="cam_container" type="Node3D" parent="player_node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
@@ -144,71 +155,6 @@ skeleton = NodePath("../../../../../..")
 [node name="camera_positioner" type="Node3D" parent="player_node"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
-[node name="DEBUG" type="Control" parent="player_node"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="player_node/DEBUG"]
-unique_name_in_owner = true
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 30.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="fps_label" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="state_label" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="states" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-visible = false
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="grounded" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="slope_angle_directional" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="slope_angle_global" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="friction" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="over_slipping_threshold" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
-[node name="current_surface" type="Label" parent="player_node/DEBUG/VBoxContainer"]
-layout_mode = 2
-text = "DEBUG_LABEL"
-label_settings = SubResource("LabelSettings_fuo7r")
-
 [node name="ray_container" type="Node3D" parent="player_node"]
 top_level = true
 
@@ -218,30 +164,50 @@ visible = false
 mesh = SubResource("BoxMesh_f5igj")
 skeleton = NodePath("../../..")
 
-[node name="floor_ray" type="RayCast3D" parent="player_node/ray_container"]
+[node name="ray_center" type="RayCast3D" parent="player_node/ray_container"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 exclude_parent = false
-target_position = Vector3(0, -1.5, 0)
+target_position = Vector3(0, -1.3, 0)
 
-[node name="floor_ray2" type="RayCast3D" parent="player_node/ray_container"]
-transform = Transform3D(0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0, 1, 0, 1, 0)
+[node name="ray_left" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(1, -4.47035e-08, 0, 4.47035e-08, 1, 0, 0, 0, 1, -0.25, 1, 0)
 exclude_parent = false
-target_position = Vector3(0, -1.5, 0)
+target_position = Vector3(0, -1.3, 0)
 
-[node name="floor_ray3" type="RayCast3D" parent="player_node/ray_container"]
-transform = Transform3D(0.965926, -0.258819, 0, 0.258819, 0.965926, 0, 0, 0, 1, 0, 1, 0)
+[node name="ray_right" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(1, 4.47035e-08, 0, -4.47035e-08, 1, 0, 0, 0, 1, 0.25, 1, 0)
 exclude_parent = false
-target_position = Vector3(0, -1.5, 0)
+target_position = Vector3(0, -1.3, 0)
 
-[node name="floor_ray4" type="RayCast3D" parent="player_node/ray_container"]
-transform = Transform3D(-4.2222e-08, -1.13133e-08, 1, -0.258819, 0.965926, 0, -0.965926, -0.258819, -4.37114e-08, 0, 1, 0)
+[node name="ray_back" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(-4.2222e-08, -1.13133e-08, 1, 4.47035e-08, 1, 1.13133e-08, -1, 4.47035e-08, -4.2222e-08, 0, 1, 0.25)
 exclude_parent = false
-target_position = Vector3(0, -1.5, 0)
+target_position = Vector3(0, -1.3, 0)
 
-[node name="floor_ray5" type="RayCast3D" parent="player_node/ray_container"]
-transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, 0.258819, 0.965926, 0, -0.965926, 0.258819, -4.37114e-08, 0, 1, 0)
+[node name="ray_forward" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(-4.2222e-08, 1.13133e-08, 1, -4.47035e-08, 1, -1.13133e-08, -1, -4.47035e-08, -4.2222e-08, 0, 1, -0.25)
 exclude_parent = false
-target_position = Vector3(0, -1.5, 0)
+target_position = Vector3(0, -1.3, 0)
+
+[node name="ray_back_left" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(0.707107, -3.16101e-08, 0.707107, 4.47035e-08, 1, 0, -0.707107, 3.16101e-08, 0.707107, -0.176777, 1, 0.176777)
+exclude_parent = false
+target_position = Vector3(0, -1.3, 0)
+
+[node name="ray_front_right" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(0.707107, 3.16101e-08, 0.707107, -4.47035e-08, 1, 0, -0.707107, -3.16101e-08, 0.707107, 0.176777, 1, -0.176777)
+exclude_parent = false
+target_position = Vector3(0, -1.3, 0)
+
+[node name="ray_back_right" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(-0.707107, 2.36104e-08, 0.707107, 4.47035e-08, 1, 1.13133e-08, -0.707107, 3.96098e-08, -0.707107, 0.176777, 1, 0.176777)
+exclude_parent = false
+target_position = Vector3(0, -1.3, 0)
+
+[node name="ray_forward_left" type="RayCast3D" parent="player_node/ray_container"]
+transform = Transform3D(-0.707107, -2.36104e-08, 0.707107, -4.47035e-08, 1, -1.13133e-08, -0.707107, -3.96098e-08, -0.707107, -0.176777, 1, -0.176777)
+exclude_parent = false
+target_position = Vector3(0, -1.3, 0)
 
 [node name="floor_shapecast" type="ShapeCast3D" parent="player_node/ray_container"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -252,5 +218,78 @@ max_results = 1
 
 [node name="unstuck_timer" type="Timer" parent="player_node"]
 one_shot = true
+
+[node name="DEBUG" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DEBUG"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="fps_label" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="state_label" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="grounded" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="slope_angle_directional" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="slope_angle_global" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="friction" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="over_slipping_threshold" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="current_surface" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="active_ray" type="Label" parent="DEBUG/VBoxContainer"]
+layout_mode = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+
+[node name="max_fall_speed" type="Label" parent="DEBUG"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 36.0
+grow_horizontal = 2
+text = "DEBUG_LABEL"
+label_settings = SubResource("LabelSettings_fuo7r")
+horizontal_alignment = 1
 
 [connection signal="timeout" from="player_node/unstuck_timer" to="player_node" method="_on_unstuck_timer_timeout"]
