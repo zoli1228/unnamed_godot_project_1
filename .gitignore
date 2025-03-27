@@ -1,5 +1,6 @@
-.gitignore
-.git/
+# Godot 4+ specific ignores
 .godot/
-sounds/
-*.import
+/android/
+/no_upload/
+/sounds/
+.git/
